@@ -17,7 +17,7 @@ function ViewInvoiceWithoutLogin() {
     try {
         console.log('hello')
       const res = await axios.get(
-        "https://klusterthon-project67.onrender.com/api/v1/invoice/recipient?_id=" +
+        import.meta.env.VITE_BASE_URL+"invoice/recipient?_id=" +
           params.id
       );
       const data = await res.data;

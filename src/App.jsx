@@ -25,6 +25,7 @@ import StripeContainer from "./components/StripeContainer";
 import PaymentSuccess from "./Pages/PaymentSuccess";
 
 function App() {
+  console.log("hello")
   const dispatch = useDispatch();
   const skip = Cookies.get("uid") ? false : true;
   const { data, isLoading, error } = useGetUserDetailsQuery("userDetails");

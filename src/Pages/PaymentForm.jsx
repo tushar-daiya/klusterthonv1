@@ -22,7 +22,7 @@ export default function PaymentForm({ values, clientSecret }) {
         status: status,
       };
       const res = await axios.post(
-        "https://klusterthon-project67.onrender.com/api/v1/transaction/verify",
+        import.meta.env.VITE_BASE_URL+"transaction/verify",
         temp
       );
       console.log(res);

@@ -6,6 +6,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import store from "./store.js";
+console.log("hello")
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>

@@ -7,8 +7,7 @@ import axios from "axios";
 import LoadingScreen from "./LoadingScreen";
 import toast from "react-hot-toast";
 
-const PUBLIC_KEY =
-  "pk_test_51Mve0xKXWcWktbbQQJOJpbbe8Ypoer4XVJqlfcyFcZlLIkfEeGoVeA9Gz1MU0BwXP4gbAjSonG43j3V1H0OGBASI00E7TVChcV";
+const PUBLIC_KEY =import.meta.env.VITE_STRIPE_KEY;
 
 const stripeTestPromise = loadStripe(PUBLIC_KEY);
 
@@ -24,7 +23,7 @@ export default function StripeContainer() {
       try {
         setLoading(true);
         const res = await axios.post(
-          "https://klusterthon-project67.onrender.com/api/v1/transaction",
+          import.meta.env.VITE_BASE_URL+"/transaction/",
           rest
         );
         const data = await res.data;

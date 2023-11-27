@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://klusterthon-project67.onrender.com/api/v1/",
+    baseUrl: import.meta.env.VITE_BASE_URL,
     tagTypes: ["Client", "Invoice"],
     prepareHeaders: (headers, { getState }) => {
       const token = Cookies.get("token");

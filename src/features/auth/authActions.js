@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
-const backendURL = "https://klusterthon-project67.onrender.com/api/v1";
+const backendURL = import.meta.env.VITE_BASE_URL;
 
 export const registerUser = createAsyncThunk(
   "auth/register",

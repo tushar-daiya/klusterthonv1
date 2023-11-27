@@ -16,7 +16,7 @@ function VerifyOTP() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://klusterthon-project67.onrender.com/api/v1/auth/verify",
+        import.meta.env.VITE_BASE_URL+"auth/verify",
         data
       );
       if (response?.data?.success) {
@@ -75,7 +75,7 @@ function VerifyEmail() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://klusterthon-project67.onrender.com/api/v1/auth/verify-otp",
+        import.meta.env.VITE_BASE_URL+"auth/verify-otp",
         data
       );
 
@@ -98,7 +98,7 @@ function VerifyEmail() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://klusterthon-project67.onrender.com/api/v1/auth/verify",
+        import.meta.env.VITE_BASE_URL+"auth/verify",
         data
       );
 

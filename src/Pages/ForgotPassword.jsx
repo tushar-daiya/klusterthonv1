@@ -19,7 +19,7 @@ function ForgotPassword() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://klusterthon-project67.onrender.com/api/v1/auth/forgot-password",
+      import.meta.env.VITE_BASE_URL+"auth/forgot-password",
         data
       );
 
@@ -44,7 +44,7 @@ function ForgotPassword() {
     try {
       setLoading(true);
       const response = await axios.patch(
-        "https://klusterthon-project67.onrender.com/api/v1/auth/reset-password",
+        import.meta.env.VITE_BASE_URL+"auth/reset-password",
         data
       );
 
