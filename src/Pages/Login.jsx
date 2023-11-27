@@ -57,7 +57,7 @@ function Login() {
       <div>
         <h1 className="text-sv-xxl font-bold">Login To Resume</h1>
         <p className="text-sv-grey text-lg">
-          Login to get access to your purchased course.
+        Login to get access to your dashboard
         </p>
       </div>
       <form onSubmit={formik.handleSubmit}>

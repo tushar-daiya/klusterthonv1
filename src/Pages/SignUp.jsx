@@ -44,7 +44,7 @@ function SignUp() {
       <div>
         <h1 className="text-sv-xxl font-bold">Sign Up to Get Started</h1>
         <p className="text-sv-grey text-lg">
-          Sign up to get access to your purchased course.
+          Sign up to get access to your dashboard.
         </p>
       </div>
       <form onSubmit={formik.handleSubmit}>
