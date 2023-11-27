@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { registerUser, userLogin } from "./authActions";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
 const initialState = {
   loading: false,
   user: null,
   error: null,
   success: false,
 };
-
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -19,6 +19,7 @@ const authSlice = createSlice({
       state.user = null;
       state.error = null;
       state.success = false;
+      
     },
     setUser: (state, { payload }) => {
       state.user = payload;

@@ -5,7 +5,7 @@ export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_URL,
-    tagTypes: ["Client", "Invoice"],
+    tagTypes: ["Client", "Invoice", "User"],
     prepareHeaders: (headers, { getState }) => {
       const token = Cookies.get("token");
       if (token) {
@@ -15,32 +15,40 @@ export const authApi = createApi({
     },
   }),
   endpoints: (builder) => ({
+    getMonthAnalysis: builder.query({
+      query: () => ({
+        url: `transaction/analysis/monthly`,
+        method: "GET",
+      }),
+      providesTags: ["Client", "Invoice","User"],
+    }),
     getAnalysis: builder.query({
       query: () => ({
         url: `transaction/analysis`,
         method: "GET",
       }),
-      providesTags: ["Client", "Invoice"],
+      providesTags: ["Client", "Invoice","User"],
     }),
     getUserDetails: builder.query({
       query: () => ({
         url: `user?_id=${Cookies.get("uid")}`,
         method: "GET",
       }),
+      providesTags: ["User"],
     }),
     getClients: builder.query({
       query: () => ({
         url: `client`,
         method: "GET",
       }),
-      providesTags: ["Client"],
+      providesTags: ["Client","User"],
     }),
     getClient: builder.query({
       query: (id) => ({
         url: `client/?_id=${id}`,
         method: "GET",
       }),
-      providesTags: ["Client"],
+      providesTags: ["Client","User"],
     }),
     createClient: builder.mutation({
       query: (clientDetails) => ({
@@ -48,14 +56,14 @@ export const authApi = createApi({
         method: "POST",
         body: clientDetails,
       }),
-      invalidatesTags: ["Client"],
+      invalidatesTags: ["Client","User"],
     }),
     deleteClient: builder.mutation({
       query: (id) => ({
         url: `client/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Client"],
+      invalidatesTags: ["Client","User"],
     }),
     updateClient: builder.mutation({
       query: (values) => ({
@@ -63,7 +71,7 @@ export const authApi = createApi({
         method: "PATCH",
         body: values.values,
       }),
-      invalidatesTags: ["Client"],
+      invalidatesTags: ["Client","User"],
     }),
 
     getInvoices: builder.query({
@@ -71,7 +79,7 @@ export const authApi = createApi({
         url: `invoice`,
         method: "GET",
       }),
-      providesTags: ["Invoice"],
+      providesTags: ["Invoice","User"],
     }),
     createInvoice: builder.mutation({
       query: (invoiceDetails) => ({
@@ -79,7 +87,7 @@ export const authApi = createApi({
         method: "POST",
         body: invoiceDetails,
       }),
-      invalidatesTags: ["Invoice"],
+      invalidatesTags: ["Invoice","User"],
     }),
 
     getInvoice: builder.query({
@@ -87,21 +95,21 @@ export const authApi = createApi({
         url: `invoice/?_id=${id}`,
         method: "GET",
       }),
-      providesTags: ["Invoice"],
+      providesTags: ["Invoice","User"],
     }),
     getInvoiceByEmail: builder.query({
       query: (email) => ({
         url: `invoice/?email=${email}`,
         method: "GET",
       }),
-      providesTags: ["Invoice"],
+      providesTags: ["Invoice","User"],
     }),
     deleteInvoice: builder.mutation({
       query: (id) => ({
         url: `invoice/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Invoice"],
+      invalidatesTags: ["Invoice","User"],
     }),
   }),
 });
@@ -119,4 +127,5 @@ export const {
   useUpdateClientMutation,
   useGetInvoiceByEmailQuery,
   useGetAnalysisQuery,
+  useGetMonthAnalysisQuery,
 } = authApi;

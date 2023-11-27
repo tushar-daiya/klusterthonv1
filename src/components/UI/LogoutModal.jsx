@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../features/auth/authSlice";
+import { authApi } from "../../features/auth/authServices";
 
 function LogoutModal({toggleModal}) {
   const dispatch = useDispatch();
@@ -14,7 +15,9 @@ function LogoutModal({toggleModal}) {
             
             <h2 className="text-lg font-semibold ">Do you want to log out?
             </h2>
-            <button onClick={()=>dispatch(logoutUser())} className="h-12 bg-sv-red text-white font-medium w-full rounded-xl">
+            <button onClick={()=>{dispatch(logoutUser())
+            dispatch(authApi.util.resetApiState())
+            }} className="h-12 bg-sv-red text-white font-medium w-full rounded-xl">
                 Yes, log out
             </button>
             <button onClick={toggleModal} className="h-12 bg-sv-grey text-white font-medium w-full rounded-xl">
