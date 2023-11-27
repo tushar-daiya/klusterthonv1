@@ -15,6 +15,12 @@ export const authApi = createApi({
     },
   }),
   endpoints: (builder) => ({
+    getAnalysis: builder.query({
+      query: () => ({
+        url: `transaction/analysis`,
+        method: "GET",
+      }),
+    }),
     getUserDetails: builder.query({
       query: () => ({
         url: `user?_id=${Cookies.get("uid")}`,
@@ -111,4 +117,5 @@ export const {
   useGetInvoiceQuery,
   useUpdateClientMutation,
   useGetInvoiceByEmailQuery,
+  useGetAnalysisQuery,
 } = authApi;
