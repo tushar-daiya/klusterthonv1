@@ -18,8 +18,11 @@ function InvoiceItem(props) {
           type="text"
         />
       </div>
-      <div className="w-1/5 px-2">
+      <div className="w-[22%] px-2">
         <input
+        step={100}
+        min={0}
+        oninput="this.value = Math.abs(this.value)"
           value={props.item.qty}
           onChange={(e) =>
             props.handleChange(props.id, "qty", e.target.value)
@@ -29,8 +32,10 @@ function InvoiceItem(props) {
           type="number"
         />
       </div>
-      <div className="w-1/5 px-2">
+      <div className="w-[22%] px-2">
         <input
+        min={0}
+        oninput="this.value = Math.abs(this.value)"
           value={props.item.price}
           onChange={(e) =>
             props.handleChange(props.id, "price", e.target.value)
@@ -40,7 +45,7 @@ function InvoiceItem(props) {
           type="number"
         />
       </div>
-      <div className="w-[10%] flex items-center justify-center">
+      <div className="w-[6%] flex items-center justify-center">
       <Trash2 onClick={()=>props.deleteItem(props.id)} color="rgba(239,0,0,1)" size={20} className="cursor-pointer" />
       </div>
     </div>

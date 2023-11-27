@@ -18,7 +18,7 @@ import { TailSpin } from "react-loader-spinner";
 
 function CreateInvoice() {
   const { isLoading, isSuccess, error, data } = useGetClientsQuery();
-  const initialValues={
+  const initialValues = {
     billTo: "",
     email: "",
     billingAddress: "",
@@ -40,7 +40,7 @@ function CreateInvoice() {
         itemId: 2,
       },
     ],
-  }
+  };
   const [
     createInvoice,
     {
@@ -107,13 +107,16 @@ function CreateInvoice() {
       return;
     }
     try {
-      console.log(billDetails)
-      
-      const data = await createInvoice({...billDetails,address:billDetails.billingAddress}).unwrap();
+      console.log(billDetails);
+
+      const data = await createInvoice({
+        ...billDetails,
+        address: billDetails.billingAddress,
+      }).unwrap();
       if (data?.success) {
         toast.success("Invoice Sent Successfully");
       }
-      console.log(data)
+      console.log(data);
       setBillDetails(initialValues);
     } catch (error) {
       toast.error("Something went wrong");
@@ -146,7 +149,7 @@ function CreateInvoice() {
             </p>
           </div>
           <div className="flex justify-between m-8">
-            <div className="w-[35%]">
+            <div className="w-[40%]">
               <div className="w-full border-b-2 border-solid border-greyBg">
                 <Dropdown
                   clients={data?.data}
@@ -195,23 +198,23 @@ function CreateInvoice() {
                   className="h-12 hover:bg-sv-red flex items-center justify-center hover:text-white transition-all w-full text-sv-red rounded-xl bg-sv-red-light"
                 >
                   {invoiceLoading ? (
-        <TailSpin
-        height="32"
-        width="32"
-        color="#ffffff"
-        ariaLabel="tail-spin-loading"
-        radius="1"
-        wrapperStyle={{}}
-        wrapperClass=""
-        visible={true}
-      />
-      ) : (
-        <span className="font-medium">Send Invoice</span>
-      )}
+                    <TailSpin
+                      height="32"
+                      width="32"
+                      color="#ffffff"
+                      ariaLabel="tail-spin-loading"
+                      radius="1"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                      visible={true}
+                    />
+                  ) : (
+                    <span className="font-medium">Send Invoice</span>
+                  )}
                 </button>
               </div>
             </div>
-            <div className="w-[63%] pointer-events-none">
+            <div className="w-[58%] pointer-events-none">
               <h2 className="text-lg font-bold">Preview</h2>
               <InvoicePreview
                 billTo={billDetails?.billTo}
