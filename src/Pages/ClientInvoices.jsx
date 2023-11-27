@@ -79,7 +79,6 @@ function ClientInvoices() {
   ] = useDeleteInvoiceMutation();
   return (
     <div>
-      {isLoading && <LoadingScreen />}
       {modal && (
         <DeleteModal
           loading={deleteLoading}
@@ -127,6 +126,7 @@ function ClientInvoices() {
             Client Invoices
           </h2>
           <div className="mt-2 border-b-2 border-greyBg border-solid w-full"></div>
+          {isLoading && <LoadingScreen />}
           {isSuccess && data?.data && (
             <div className="mt-5">
               <Card className="h-full w-full overflow-scroll shadow-none">
