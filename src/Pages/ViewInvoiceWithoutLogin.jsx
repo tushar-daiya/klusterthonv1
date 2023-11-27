@@ -56,11 +56,11 @@ function ViewInvoiceWithoutLogin() {
       { data?.data && (
         <div className="w-1/2 mx-auto ">
           <div className="w-full">
-            <button
+            {/* <button
               className="h-12 hover:bg-sv-red hover:text-white transition-all w-full text-sv-red rounded-xl bg-sv-red-light mt-10"
             >
               <span className="font-medium">Download Invoice</span>
-            </button>
+            </button> */}
             {data?.data && <InvoicePreview recipient={true} billTo={data?.data[0]?.billTo} email={data?.data[0]?.email} address={data?.data[0]?.address} additional={data?.data[0]?.note} items={data?.data[0]?.services} totalPrice={data?.data[0]?.totalPrice}  phone={data?.data[0]?.phone} issuedOn={data?.data[0]?.issuedOn.substring(0,10)} paymentDue={data?.data[0]?.paymentDue.substring(0,10)} title={"Click here to pay"} status={data?.data[0]?.status} action={action} />}
           </div>
         </div>
