@@ -7,7 +7,6 @@ import InvoicePreview from "../components/InvoicePreview";
 
 function ViewInvoiceWithoutLogin() {
   const params = useParams();
-  console.log(params);
   const navigate=useNavigate()
   
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +14,6 @@ function ViewInvoiceWithoutLogin() {
   const [data, setData] = useState(null);
   const getData = async () => {
     try {
-        console.log('hello')
       const res = await axios.get(
         import.meta.env.VITE_BASE_URL+"invoice/recipient?_id=" +
           params.id
@@ -23,7 +21,6 @@ function ViewInvoiceWithoutLogin() {
       const data = await res.data;
       if (data?.success) {
         setData(data);
-        console.log(data)
         setIsLoading(false);
 
       }

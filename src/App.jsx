@@ -24,7 +24,6 @@ import StripeContainer from "./components/StripeContainer";
 import ClientInvoices from "./Pages/ClientInvoices";
 
 function App() {
-  console.log("hello")
   const dispatch = useDispatch();
   const { data, isLoading, error } = useGetUserDetailsQuery("userDetails");
   useEffect(() => {
@@ -78,7 +77,6 @@ function AuthRoutes() {
   );
 }
 function InvoiceRoutes() {
-  console.log("hello");
   return (
     <Routes>
       <Route element={<InvoiceHeader />}>

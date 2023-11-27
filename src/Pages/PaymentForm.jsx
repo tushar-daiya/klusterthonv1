@@ -25,13 +25,11 @@ export default function PaymentForm({ values, clientSecret }) {
         import.meta.env.VITE_BASE_URL+"transaction/verify",
         temp
       );
-      console.log(res);
       if (res.data.success) {
         toast.success("Payment Successful");
         navigate("/invoices/view/"+values._id)
       }
     } catch (error) {
-      console.log(error);
     }
   };
   const CARD_OPTIONS = {
@@ -92,7 +90,6 @@ export default function PaymentForm({ values, clientSecret }) {
           });
       } 
       catch (error) {
-        console.log(error);
         toast.error("something went wrong")
       }
       finally{

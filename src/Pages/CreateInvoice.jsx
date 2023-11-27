@@ -29,8 +29,8 @@ function CreateInvoice() {
     services: [
       {
         item: "",
-        qty: 0,
-        price: 0,
+        qty: "",
+        price: "",
         itemId: 1,
       },
     ],
@@ -104,8 +104,15 @@ function CreateInvoice() {
       toast.error("Total Price must be greater than 50");
       return;
     }
+    const hasEmptyFields = billDetails.services.some((item) => {
+      return item.item === "" || item.qty === "" || item.price === "";
+    });
+  
+    if (hasEmptyFields) {
+      toast.error("Please fill up all the fields");
+      return;
+    }
     try {
-      console.log(billDetails);
 
       const data = await createInvoice({
         ...billDetails,
@@ -114,7 +121,6 @@ function CreateInvoice() {
       if (data?.success) {
         toast.success("Invoice Sent Successfully");
       }
-      console.log(data);
       setBillDetails(initialValues);
     } catch (error) {
       toast.error("Something went wrong");

@@ -6,7 +6,6 @@ import LoadingScreen from "../components/LoadingScreen";
 import { ArrowLeft } from "lucide-react";
 
 function ViewInvoice() {
-  console.log("view invoice");
   const params = useParams();
   const { data, isLoading, isSuccess, error } = useGetInvoiceQuery(params.id);
 

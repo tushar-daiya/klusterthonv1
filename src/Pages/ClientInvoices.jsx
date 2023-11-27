@@ -157,7 +157,6 @@ function ClientInvoices() {
                         status,
                         _id,
                       }) => {
-                        console.log(_id);
                         const classes = "p-4";
 
                         return (

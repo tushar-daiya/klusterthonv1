@@ -27,7 +27,6 @@ export default function StripeContainer() {
           rest
         );
         const data = await res.data;
-        console.log(data);
         if (data?.success) {
           setClientSecret(data?.data?.data?.clientSecret);
         }

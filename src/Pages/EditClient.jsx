@@ -13,9 +13,6 @@ function EditClient() {
   const { id } = useParams();
   const { data, isSuccess, isLoading,isFetching } = useGetClientQuery(id);
 
-  if (isSuccess) {
-    console.log(data);
-  }
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
     setModal(!modal);
@@ -61,7 +58,6 @@ const EditClientForm = ({ client }) => {
         formik.resetForm();
 
       } catch (error) {
-        console.log(error)
         toast.error(error?.data?.message)
       }
     },
