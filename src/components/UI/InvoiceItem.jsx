@@ -20,7 +20,6 @@ function InvoiceItem(props) {
       </div>
       <div className="w-[22%] px-2">
         <input
-        step={100}
         min={0}
         oninput="this.value = Math.abs(this.value)"
           value={props.item.qty}
@@ -35,6 +34,7 @@ function InvoiceItem(props) {
       <div className="w-[22%] px-2">
         <input
         min={0}
+        step={100}
         oninput="this.value = Math.abs(this.value)"
           value={props.item.price}
           onChange={(e) =>
