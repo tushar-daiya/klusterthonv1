@@ -39,8 +39,24 @@ const [deleteId, setDeleteId] = useState("");
     },
   ];
   
+
   
-  // const [searchResults, setSearchResults] = useState(invoices);
+  const [searchResults, setSearchResults] = useState(null);
+  useEffect(() => {
+    setSearchResults(data?.data);
+  }, [data]);
+
+  const handleSearch = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    setSearchTerm(searchTerm);
+    const results = data?.data.filter((invoice) => {
+      return Object.values(invoice).some(
+        (value) => typeof value === "string" && value.toLowerCase().includes(searchTerm)
+      );
+    });
+  
+    setSearchResults(results);
+  };
   // useEffect(() => {
   //   handleSearch();
   // }, [searchTerm]);
@@ -98,12 +114,12 @@ const [deleteInvoice, { isLoading:deleteLoading, isSuccess:deleteSuccess,error:d
                   placeholder="Search by Invoice No, Email, Billed To, or Issued On"
                   type="text"
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={handleSearch}
                 />
               </div>
             </div>
           </div>
-          {isSuccess && data?.data && (
+          {isSuccess && searchResults && (
             <div className="mt-5">
               <Card className="h-full w-full overflow-scroll shadow-none">
                 <table className="w-full min-w-max table-auto text-left">
@@ -123,7 +139,7 @@ const [deleteInvoice, { isLoading:deleteLoading, isSuccess:deleteSuccess,error:d
                     </tr>
                   </thead>
                   <tbody>
-                    {data?.data?.map(
+                    {searchResults?.map(
                       (
                         {
                           invoiceId,

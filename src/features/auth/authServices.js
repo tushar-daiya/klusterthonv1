@@ -58,11 +58,11 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Client"],
     }),
+
     getInvoices: builder.query({
       query: () => ({
         url: `invoice`,
         method: "GET",
-        
       }),
       providesTags: ["Invoice"],
     }),
@@ -74,8 +74,7 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Invoice"],
     }),
-    
-    
+
     getInvoice: builder.query({
       query: (id) => ({
         url: `invoice/?_id=${id}`,

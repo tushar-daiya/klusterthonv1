@@ -86,18 +86,27 @@ function Clients() {
       },
     },
   ];
-  const [searchResults, setSearchResults] = useState(clients);
+  const [searchResults, setSearchResults] = useState(null);
   useEffect(() => {
-    handleSearch();
-  }, [searchTerm]);
-  const handleSearch = () => {
-    const results = clients.filter((client) =>
-      Object.values(client).some((value) =>
-        value.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
-    setSearchResults(results.length > 0 ? results : null);
+    if (data?.data) {
+      setSearchResults(data?.data);
+    }
+  }, [data]);
+  // useEffect(() => {
+  //   handleSearch();
+  // }, [searchTerm]);
+  const handleSearch = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    setSearchTerm(searchTerm);
+    const results = data?.data.filter((client) => {
+      return Object.values(client).some(
+        (value) => typeof value === "string" && value.toLowerCase().includes(searchTerm)
+      );
+    });
+  
+    setSearchResults(results);
   };
+  
 
   return (
     <div>
@@ -134,96 +143,97 @@ function Clients() {
                   placeholder="Search by ID, Name, Email or Phone"
                   type="text"
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  // onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={handleSearch}
                 />
               </div>
             </div>
           </div>
-          {isSuccess&& data?.data&&(
-          <div className="mt-5">
-            <Card className="h-full w-full overflow-scroll shadow-none">
-              <table className="w-full min-w-max table-auto text-left">
-                <thead>
-                  <tr>
-                    {TABLE_HEAD.map((head) => (
-                      <th key={head} className="border-b border-greyBg  p-4">
-                        <Typography
-                          variant="small"
-                          color="black"
-                          className="font-semibold leading-none"
-                        >
-                          {head}
-                        </Typography>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {data?.data?.map(
-                    (
-                      {
-                        firstName,
-                        phone,
-                        email,
-                        billingAddress,
-                        clientId,
-                        _id,
-                      },
-                      index
-                    ) => {
-                      const classes = "p-4";
+          {isSuccess && searchResults && (
+            <div className="mt-5">
+              <Card className="h-full w-full overflow-scroll shadow-none">
+                <table className="w-full min-w-max table-auto text-left">
+                  <thead>
+                    <tr>
+                      {TABLE_HEAD.map((head) => (
+                        <th key={head} className="border-b border-greyBg  p-4">
+                          <Typography
+                            variant="small"
+                            color="black"
+                            className="font-semibold leading-none"
+                          >
+                            {head}
+                          </Typography>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {searchResults?.map(
+                      (
+                        {
+                          firstName,
+                          phone,
+                          email,
+                          billingAddress,
+                          clientId,
+                          _id,
+                        },
+                        index
+                      ) => {
+                        const classes = "p-4";
 
-                      return (
-                        <tr key={index}>
-                          <td className={classes}>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal"
-                            >
-                              {clientId}
-                            </Typography>
-                          </td>
-                          <td className={classes}>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal"
-                            >
-                              {firstName}
-                            </Typography>
-                          </td>
-                          <td className={classes}>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal"
-                            >
-                              {email}
-                            </Typography>
-                          </td>
-                          <td className={classes}>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal"
-                            >
-                              {phone}
-                            </Typography>
-                          </td>
-                          <td className={classes}>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal"
-                            >
-                              {billingAddress}
-                            </Typography>
-                          </td>
-                          <td className={classes}>
-                            <ActionMenu menuActions={menuActions} id={_id} />
-                          </td>
-                          {/* <td className={classes}>
+                        return (
+                          <tr key={index}>
+                            <td className={classes}>
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {clientId}
+                              </Typography>
+                            </td>
+                            <td className={classes}>
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {firstName}
+                              </Typography>
+                            </td>
+                            <td className={classes}>
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {email}
+                              </Typography>
+                            </td>
+                            <td className={classes}>
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {phone}
+                              </Typography>
+                            </td>
+                            <td className={classes}>
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {billingAddress}
+                              </Typography>
+                            </td>
+                            <td className={classes}>
+                              <ActionMenu menuActions={menuActions} id={_id} />
+                            </td>
+                            {/* <td className={classes}>
                       <Typography
                       as="a"
                       href="#"
@@ -234,19 +244,20 @@ function Clients() {
                         Edit
                         </Typography>
                       </td> */}
-                        </tr>
-                      );
-                    }
-                  )}
-                </tbody>
-              </table>
-            </Card>
-          </div>
-
+                          </tr>
+                        );
+                      }
+                    )}
+                  </tbody>
+                </table>
+              </Card>
+            </div>
           )}
-          {error && <NoData title={"Add clients info"} desc="No clients to display">
-            <FileText size={64} />
-            </NoData>}
+          {error && (
+            <NoData title={"Add clients info"} desc="No clients to display">
+              <FileText size={64} />
+            </NoData>
+          )}
         </div>
       )}
     </div>

@@ -29,15 +29,9 @@ function CreateInvoice() {
     services: [
       {
         item: "",
-        qty: "",
-        price: "",
+        qty: 0,
+        price: 0,
         itemId: 1,
-      },
-      {
-        item: "",
-        qty: "",
-        price: "",
-        itemId: 2,
       },
     ],
   };
@@ -104,6 +98,10 @@ function CreateInvoice() {
   const sendInvoice = async () => {
     if (billDetails.billTo.length == 0) {
       toast.error("Please fill up all the fields");
+      return;
+    }
+    if (totalPrice <= 50) {
+      toast.error("Total Price must be greater than 50");
       return;
     }
     try {
