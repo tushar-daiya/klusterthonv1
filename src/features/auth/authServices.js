@@ -82,6 +82,13 @@ export const authApi = createApi({
       }),
       providesTags: ["Invoice"],
     }),
+    getInvoiceByEmail: builder.query({
+      query: (email) => ({
+        url: `invoice/?email=${email}`,
+        method: "GET",
+      }),
+      providesTags: ["Invoice"],
+    }),
     deleteInvoice: builder.mutation({
       query: (id) => ({
         url: `invoice/${id}`,
@@ -103,4 +110,5 @@ export const {
   useGetClientQuery,
   useGetInvoiceQuery,
   useUpdateClientMutation,
+  useGetInvoiceByEmailQuery,
 } = authApi;

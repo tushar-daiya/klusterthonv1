@@ -76,7 +76,7 @@ function Clients() {
     },
     {
       name: "View Client Invoice",
-      onClick: () => navigate("/clients/invoices"),
+      onClick: (id,values) => navigate(`/clients/invoices/${id}`, { state: values }),
     },
     {
       name: "Delete Client",
@@ -100,13 +100,13 @@ function Clients() {
     setSearchTerm(searchTerm);
     const results = data?.data.filter((client) => {
       return Object.values(client).some(
-        (value) => typeof value === "string" && value.toLowerCase().includes(searchTerm)
+        (value) =>
+          typeof value === "string" && value.toLowerCase().includes(searchTerm)
       );
     });
-  
+
     setSearchResults(results);
   };
-  
 
   return (
     <div>
@@ -173,6 +173,7 @@ function Clients() {
                       (
                         {
                           firstName,
+                          lastName,                          
                           phone,
                           email,
                           billingAddress,
@@ -231,7 +232,7 @@ function Clients() {
                               </Typography>
                             </td>
                             <td className={classes}>
-                              <ActionMenu menuActions={menuActions} id={_id} />
+                              <ActionMenu menuActions={menuActions} values={{email,phone,name:firstName+" "+lastName,address:billingAddress}} id={_id} />
                             </td>
                             {/* <td className={classes}>
                       <Typography

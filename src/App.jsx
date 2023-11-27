@@ -23,6 +23,7 @@ import { VerifyEmail, VerifyOTP } from "./Pages/VerifyEmail";
 import ViewInvoiceWithoutLogin from "./Pages/ViewInvoiceWithoutLogin";
 import StripeContainer from "./components/StripeContainer";
 import PaymentSuccess from "./Pages/PaymentSuccess";
+import ClientInvoices from "./Pages/ClientInvoices";
 
 function App() {
   console.log("hello")
@@ -95,6 +96,7 @@ function ClientRoutes() {
       <Route element={<ClientHeader />}>
         <Route index element={<Clients />} />
         <Route path="/create" element={<CreateClient />} />
+        <Route path="/invoices/:id" element={<ClientInvoices />} />
         <Route path="/edit/:id" element={<EditClient />} />
       </Route>
     </Routes>

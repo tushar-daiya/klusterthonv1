@@ -7,7 +7,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { MoreVertical } from "lucide-react";
-function ActionMenu({ menuActions,id }) {
+function ActionMenu({ menuActions,id,values}) {
   
   return (
     <Menu>
@@ -21,7 +21,7 @@ function ActionMenu({ menuActions,id }) {
               ? "mb-0 bg-greyBg h-10 text-black "
               : "mb-2 bg-greyBg h-10 text-black ";
           return (
-            <MenuItem onClick={()=>action.onClick(id)} key={index} className={classes}>
+            <MenuItem onClick={()=>action.onClick(id,values)} key={index} className={classes}>
               {action.name}
             </MenuItem>
           );
