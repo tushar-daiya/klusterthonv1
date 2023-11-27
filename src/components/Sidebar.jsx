@@ -7,7 +7,6 @@ import LogoutModal from "./UI/LogoutModal";
 function Sidebar() {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
-  const dispatch = useDispatch();
   const [logoutModal, setLogoutModal] = useState(false);
   return (
     <div className="w-4/5">

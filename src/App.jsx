@@ -18,11 +18,9 @@ import { Cookie } from "lucide-react";
 import { useGetUserDetailsQuery } from "./features/auth/authServices";
 import { setUser } from "./features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Cookies from "js-cookie";
 import { VerifyEmail, VerifyOTP } from "./Pages/VerifyEmail";
 import ViewInvoiceWithoutLogin from "./Pages/ViewInvoiceWithoutLogin";
 import StripeContainer from "./components/StripeContainer";
-import PaymentSuccess from "./Pages/PaymentSuccess";
 import ClientInvoices from "./Pages/ClientInvoices";
 
 function App() {
@@ -49,7 +47,6 @@ function App() {
           />
         )}
         {!user && <Route path="/payment" element={<StripeContainer />} />}        
-        {!user && <Route path="/payment/success" element={<PaymentSuccess />} />}        
 
         <Route element={!user ? <Navigate to={"/auth/login"} /> : <Layout />}>
           <Route path="/" element={<Dashboard />} />
@@ -60,6 +57,7 @@ function App() {
           path="auth/*"
           element={user ? <Navigate to={"/"} /> : <AuthRoutes />}
         />
+        <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </BrowserRouter>
   );
@@ -74,6 +72,7 @@ function AuthRoutes() {
         <Route path="verify-email" element={<VerifyEmail />} />
 
         <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="*" element={<Navigate to={"/auth/login"} />} />
       </Route>
     </Routes>
   );
@@ -86,6 +85,7 @@ function InvoiceRoutes() {
         <Route index element={<Invoice />} />
         <Route path="/create" element={<CreateInvoice />} />
         <Route path="/view/:id" element={<ViewInvoice />} />
+        <Route path="*" element={<Navigate to={"/invoices"} />} />
       </Route>
     </Routes>
   );
@@ -98,6 +98,7 @@ function ClientRoutes() {
         <Route path="/create" element={<CreateClient />} />
         <Route path="/invoices/:id" element={<ClientInvoices />} />
         <Route path="/edit/:id" element={<EditClient />} />
+        <Route path="*" element={<Navigate to={"/clients"} />} />
       </Route>
     </Routes>
   );
