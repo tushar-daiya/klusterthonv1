@@ -23,7 +23,7 @@ export default function StripeContainer() {
       try {
         setLoading(true);
         const res = await axios.post(
-          import.meta.env.VITE_BASE_URL+"/transaction/",
+          import.meta.env.VITE_BASE_URL+"transaction/",
           rest
         );
         const data = await res.data;

@@ -12,7 +12,7 @@ export const registerUser = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      await axios.post(`${backendURL}/user`, data, config);
+      await axios.post(`${backendURL}user`, data, config);
     } catch (error) {
       // return custom error message from backend if present
       if (error.response && error.response.data.message) {
@@ -34,7 +34,7 @@ export const userLogin = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `${backendURL}/user/login`,
+        `${backendURL}user/login`,
         { email, password },
         config
       );
@@ -61,7 +61,7 @@ export const forgotPassword = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      await axios.post(`${backendURL}/user/forgotPassword`, { email }, config);
+      await axios.post(`${backendURL}user/forgotPassword`, { email }, config);
     } catch (error) {
       // return custom error message from API if any
       if (error.response && error.response.data.message) {
