@@ -2,7 +2,7 @@ import React from 'react'
 
 function LoadingScreen() {
   return (
-    <div className="w-full h-96 flex items-center justify-center">
+    <div className="w-full h-full flex items-center justify-center">
         <svg
             className="animate-spin -ml-1 mr-3 h-20 w-20 text-sv-red"
             xmlns="http://www.w3.org/2000/svg"

@@ -5,8 +5,8 @@ import { convertToReadableFormat } from "../utils/utils";
 
 function InvoicePreview({billTo,email,address, additional, items, totalPrice , phone, issuedOn, paymentDue, title,action,recipient,status}) {
   return (
-    <div className="w-full relative">
-      {status==="paid"&&<div className="absolute translate-y-1/2 left-0 right-0 mx-auto top-1/2 z-10">
+    <div className="w-full relative border-2 border-sv-red rounded-lg">
+      {status==="paid"&&<div className="absolute pointer-events-none translate-y-1/2 left-0 right-0 mx-auto top-1/2 z-10">
         <p className="text-6xl opacity-25 -rotate-45 text-center font-bold text-sv-green">Paid</p>
       </div>}
       <div className="mt-6 p-5 flex justify-between border-2 border-solid border-greyBg rounded-2xl">
@@ -55,11 +55,14 @@ function InvoicePreview({billTo,email,address, additional, items, totalPrice , p
           <p>Total (NG)</p>
           <p className="font-bold">{totalPrice}</p>
         </div>
+        {recipient&&status==="pending"&&<>
         <div className=" my-2 border-b-2 border-solid border-greyBg"></div>
-        {recipient&&status==="pending"&&<button onClick={action} className="w-full flex justify-between">
+        <button onClick={action} className="w-full flex justify-between">
           <p className="text-sv-red font-semibold">{title}</p>
           <MoveRight color="rgba(239,0,0,1)" />
-        </button>}
+        </button>
+        </>
+        }
       </div>
     </div>
   );

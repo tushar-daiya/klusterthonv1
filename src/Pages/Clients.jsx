@@ -76,7 +76,8 @@ function Clients() {
     },
     {
       name: "View Client Invoice",
-      onClick: (id,values) => navigate(`/clients/invoices/${id}`, { state: values }),
+      onClick: (id, values) =>
+        navigate(`/clients/invoices/${id}`, { state: values }),
     },
     {
       name: "Delete Client",
@@ -110,7 +111,6 @@ function Clients() {
 
   return (
     <div>
-      {isLoading && <LoadingScreen />}
 
       {modal && (
         <DeleteModal
@@ -125,11 +125,12 @@ function Clients() {
           handleClick={handleDelete}
         />
       )}
-      {!isLoading && (
+      
         <div>
           <div className="mt-10">
             <div className="flex justify-between">
               <button
+                disabled={isLoading}
                 onClick={() => navigate("/clients/create")}
                 className="px-4 py-3 bg-sv-red rounded-lg text-white"
               >
@@ -142,6 +143,7 @@ function Clients() {
                   className="outline-none w-full ml-2"
                   placeholder="Search by ID, Name, Email or Phone"
                   type="text"
+                  disabled={isLoading}
                   value={searchTerm}
                   // onChange={(e) => setSearchTerm(e.target.value)}
                   onChange={handleSearch}
@@ -149,9 +151,15 @@ function Clients() {
               </div>
             </div>
           </div>
-          {isSuccess && searchResults && (
-            <div className="mt-5">
-              <Card className="h-full w-full overflow-scroll shadow-none">
+
+          <div className="mt-5">
+            {isLoading && (
+              <div className="bg-white rounded-lg h-96 w-full">
+                <LoadingScreen />
+              </div>
+            )}
+            {isSuccess && searchResults && (
+              <Card className="h-full w-full overflow-x-scroll shadow-none">
                 <table className="w-full min-w-max table-auto text-left">
                   <thead>
                     <tr>
@@ -173,7 +181,7 @@ function Clients() {
                       (
                         {
                           firstName,
-                          lastName,                          
+                          lastName,
                           phone,
                           email,
                           billingAddress,
@@ -232,7 +240,16 @@ function Clients() {
                               </Typography>
                             </td>
                             <td className={classes}>
-                              <ActionMenu menuActions={menuActions} values={{email,phone,name:firstName+" "+lastName,address:billingAddress}} id={_id} />
+                              <ActionMenu
+                                menuActions={menuActions}
+                                values={{
+                                  email,
+                                  phone,
+                                  name: firstName + " " + lastName,
+                                  address: billingAddress,
+                                }}
+                                id={_id}
+                              />
                             </td>
                             {/* <td className={classes}>
                       <Typography
@@ -252,15 +269,15 @@ function Clients() {
                   </tbody>
                 </table>
               </Card>
-            </div>
-          )}
+            )}
+          </div>
           {error && (
             <NoData title={"Add clients info"} desc="No clients to display">
               <FileText size={64} />
             </NoData>
           )}
         </div>
-      )}
+      
     </div>
   );
 }

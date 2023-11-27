@@ -84,7 +84,6 @@ const [deleteId, setDeleteId] = useState("");
 const [deleteInvoice, { isLoading:deleteLoading, isSuccess:deleteSuccess,error:deleteError,data:deleteData }]=useDeleteInvoiceMutation();
   return (
     <div>
-      {isLoading && <LoadingScreen />}
       {modal && (
         <DeleteModal
           loading={deleteLoading}
@@ -96,11 +95,12 @@ const [deleteInvoice, { isLoading:deleteLoading, isSuccess:deleteSuccess,error:d
           handleClick={handleDelete}
         />
       )}
-      {!isLoading && (
+      
         <div>
           <div className="mt-10">
             <div className="flex justify-between">
               <button
+                disabled={isLoading}
                 onClick={() => navigate("/invoices/create")}
                 className="px-4 py-3 bg-sv-red rounded-lg text-white"
               >
@@ -110,6 +110,7 @@ const [deleteInvoice, { isLoading:deleteLoading, isSuccess:deleteSuccess,error:d
                 <Search strokeWidth={1} />
 
                 <input
+                  disabled={isLoading}
                   className="outline-none w-full ml-2"
                   placeholder="Search by Invoice No, Email, Billed To, or Issued On"
                   type="text"
@@ -119,9 +120,14 @@ const [deleteInvoice, { isLoading:deleteLoading, isSuccess:deleteSuccess,error:d
               </div>
             </div>
           </div>
-          {isSuccess && searchResults && (
             <div className="mt-5">
-              <Card className="h-full w-full overflow-scroll shadow-none">
+            {isLoading && (
+              <div className="bg-white rounded-lg h-96 w-full">
+                <LoadingScreen />
+              </div>
+            )}
+          {isSuccess && searchResults && (
+              <Card className="h-full w-full overflow-x-scroll shadow-none">
                 <table className="w-full min-w-max table-auto text-left">
                   <thead>
                     <tr>
@@ -223,15 +229,15 @@ const [deleteInvoice, { isLoading:deleteLoading, isSuccess:deleteSuccess,error:d
                   </tbody>
                 </table>
               </Card>
-            </div>
           )}
+            </div>
           {error && (
             <NoData title={"No Invoices"} desc={"You have no invoices yet."}>
               <FileText size={64} />
             </NoData>
           )}
         </div>
-      )}
+      
     </div>
   );
 }

@@ -22,7 +22,7 @@ function EditClient() {
   };
   return (
     <div>
-      {isLoading && <LoadingScreen />}
+      {isLoading && <div className="h-96 bg-white rounded-lg w-full mt-5"><LoadingScreen /></div>}
       {isSuccess && data?.data && <EditClientForm client={data?.data[0]} />}
     </div>
   );

@@ -20,6 +20,7 @@ export const authApi = createApi({
         url: `transaction/analysis`,
         method: "GET",
       }),
+      providesTags: ["Client", "Invoice"],
     }),
     getUserDetails: builder.query({
       query: () => ({

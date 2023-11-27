@@ -95,9 +95,10 @@ function Dashboard() {
         desc="Welcome to your dashboard"
       />
       <div className="mt-10">
+          <div className="mt-10 h-36 bg-white rounded-2xl">
         {isLoading && <LoadingScreen/>}
         {isSuccess && data?.data && (
-          <div className="mt-10 h-36 bg-white rounded-2xl grid grid-cols-4">
+          <div className="grid grid-cols-4 w-full h-full">
             <div className="relative w-full flex items-center justify-center ">
               <div>
                 <svg
@@ -275,8 +276,9 @@ function Dashboard() {
                 </p>
               </div>
             </div>
-          </div>
+            </div>
         )}
+          </div>
         <div className="mt-10 bg-white rounded-2xl px-5">
           <div className="py-5 px-2 flex justify-between items-center border-b border-solid border-[#eeeee]">
             <p className="font-semibold text-2xl">Revenue Metric</p>

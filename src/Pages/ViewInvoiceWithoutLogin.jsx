@@ -51,10 +51,10 @@ function ViewInvoiceWithoutLogin() {
     
   };
   return (
-    <div className="w-full bg-greyBg">
-      {isLoading && <LoadingScreen />}
+    <div className="w-full min-h-screen bg-greyBg">
+      {isLoading && <div className="h-screen"><LoadingScreen /></div>}
       { data?.data && (
-        <div className="md:w-1/2 w-full mx-auto ">
+        <div className="md:w-1/2 max-w-xl py-10 w-full mx-auto ">
           <div className="w-full">
             {/* <button
               className="h-12 hover:bg-sv-red hover:text-white transition-all w-full text-sv-red rounded-xl bg-sv-red-light mt-10"

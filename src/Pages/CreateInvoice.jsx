@@ -128,7 +128,7 @@ function CreateInvoice() {
   }, [billDetails.services]);
   return (
     <div>
-      {isLoading && <LoadingScreen />}
+      {isLoading && <div className="mt-5 w-full h-96 bg-white rounded-lg"><LoadingScreen /></div>}
       {error && error?.status === 400 && toast.error(error?.data?.message) && (
         <Navigate to="/clients" />
       )}
