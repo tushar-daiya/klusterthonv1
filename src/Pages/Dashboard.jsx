@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import Header from "../components/Header";
 import { useSelector } from "react-redux";
+import LoadingScreen from "../components/LoadingScreen"
 import { useGetAnalysisQuery } from "../features/auth/authServices";
 function Dashboard() {
   const { data, isLoading, isSuccess, error } = useGetAnalysisQuery();
@@ -94,6 +95,7 @@ function Dashboard() {
         desc="Welcome to your dashboard"
       />
       <div className="mt-10">
+        {isLoading && <LoadingScreen/>}
         {isSuccess && data?.data && (
           <div className="mt-10 h-36 bg-white rounded-2xl grid grid-cols-4">
             <div className="relative w-full flex items-center justify-center ">
