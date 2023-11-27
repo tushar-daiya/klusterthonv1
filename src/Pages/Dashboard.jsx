@@ -83,10 +83,13 @@ function Dashboard() {
       },
     ],
   };
-  const {user}=useSelector((state)=>state.auth)
+  const { user } = useSelector((state) => state.auth);
   return (
     <div className="w-full">
-      <Header title={`Hi, Welcome ${user?.firstName}`} desc="Welcome to your dashboard" />
+      <Header
+        title={`Hi, Welcome ${user?.firstName || "User"}`}
+        desc="Welcome to your dashboard"
+      />
       <div className="mt-10">
         <div className="mt-10 h-36 bg-white rounded-2xl grid grid-cols-4">
           <div className="relative w-full flex items-center justify-center ">
