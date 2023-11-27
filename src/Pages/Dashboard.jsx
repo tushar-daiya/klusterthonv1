@@ -107,7 +107,7 @@ function Dashboard() {
   return (
     <div className="w-full">
       <Header
-        title={`Hi, Welcome ${user?.firstName || "User"}`}
+        title={`Hi, ${user?.firstName || "User"}`}
         desc="Welcome to your dashboard"
       />
       <div className="mt-10">
@@ -156,7 +156,7 @@ function Dashboard() {
                     TOTAL REVENUE
                   </p>
                   <p className="text-[28px] font-semibold">
-                    NG {data?.data?.totalAmount.toLocaleString("en-US")}
+                    NG {data?.data?.totalAmount?.toLocaleString("en-US")}
                   </p>
                 </div>
                 <div className="absolute top-[30%] bottom-[30%] right-0 h-2/5 border-r-2 border-solid border-greyBg"></div>
