@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
+import { RefreshCcw } from "lucide-react";
+import { useGetUserDetailsQuery } from "./features/auth/authServices";
+import { setUser } from "./features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
 import Auth from "./Pages/Auth";
 import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
@@ -14,29 +19,34 @@ import EditClient from "./Pages/EditClient";
 import InvoiceHeader from "./components/UI/InvoiceHeader";
 import Invoice from "./Pages/Invoice";
 import Layout from "./components/Layout";
-import { Cookie } from "lucide-react";
-import { useGetUserDetailsQuery } from "./features/auth/authServices";
-import { setUser } from "./features/auth/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { VerifyEmail, VerifyOTP } from "./Pages/VerifyEmail";
-import ViewInvoiceWithoutLogin from "./Pages/ViewInvoiceWithoutLogin";
+import VerifyEmail from "./Pages/VerifyEmail";
+import VerifyOTP from "./Pages/VerifyOTP";
 import StripeContainer from "./components/StripeContainer";
 import ClientInvoices from "./Pages/ClientInvoices";
+import ViewInvoiceWithoutLogin from "./Pages/ViewInvoiceWithoutLogin";
 
 function App() {
   const dispatch = useDispatch();
-  const { data, isLoading, error } = useGetUserDetailsQuery("userDetails");
+  const { data, isLoading } = useGetUserDetailsQuery("userDetails");
   useEffect(() => {
     if (data) {
       dispatch(setUser(data.data));
     }
   }, [data]);
   const { user } = useSelector((state) => state.auth);
-  return isLoading ? (
-    <div className="flex justify-center items-center h-screen">
-      <Cookie size={64} />
-    </div>
-  ) : (
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <div className="animate-spin rounded-full border-t-4 border-red-500 p-4">
+          <RefreshCcw className="w-12 h-12 text-red-500" />
+        </div>
+        <p className="mt-4 text-lg text-gray-800">Loading... Please wait.</p>
+      </div>
+    );
+  }
+
+  return (
     <BrowserRouter>
       <Routes>
         {!user && (
@@ -45,22 +55,37 @@ function App() {
             element={!user && <ViewInvoiceWithoutLogin />}
           />
         )}
-        {!user && <Route path="/payment" element={<StripeContainer />} />}        
+        {!user && <Route path="/payment" element={<StripeContainer />} />}
 
-        <Route element={!user ? <Navigate to={"/auth/login"} /> : <Layout />}>
+        <Route
+          element={
+            !user ? (
+              <Navigate to={"/auth/login/"} />
+            ) : (
+              <Layout />
+            )
+          }
+        >
           <Route path="/" element={<Dashboard />} />
           <Route path="clients/*" element={<ClientRoutes />} />
           <Route path="invoices/*" element={<InvoiceRoutes />} />
         </Route>
         <Route
           path="auth/*"
-          element={user ? <Navigate to={"/"} /> : <AuthRoutes />}
+          element={
+            user ? (
+              <Navigate to={"/"} />
+            ) : (
+              <AuthRoutes />
+            )
+          }
         />
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </BrowserRouter>
   );
 }
+
 function AuthRoutes() {
   return (
     <Routes>

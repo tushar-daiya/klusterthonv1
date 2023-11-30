@@ -158,4 +158,4 @@ function VerifyEmail() {
   );
 }
 
-export { VerifyOTP, VerifyEmail}
+export default VerifyEmail
