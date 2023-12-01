@@ -27,7 +27,7 @@ export default function PaymentForm({ values, clientSecret }) {
       );
       if (res.data.success) {
         toast.success("Payment Successful");
-        navigate("/invoices/view/"+values._id)
+        navigate("/invoice/view/"+values._id)
       }
     } catch (error) {
     }

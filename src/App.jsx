@@ -93,8 +93,8 @@ function App() {
           element={!token && !uid ? <AuthRoutes /> : <Navigate to={"/"} />}
         />
         <Route
-          path="invoices/view/:id"
-          element={!token && !uid && <ViewInvoiceWithoutLogin />}
+          path="invoice/view/:id"
+          element={!token && !uid ? <ViewInvoiceWithoutLogin />:<Navigate to={"/"} />}
         />
         <Route
           element={token && uid ? <Layout /> : <Navigate to={"auth/login"} />}
@@ -102,17 +102,8 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="clients/*" element={<ClientRoutes />} />
           <Route path="invoices/*" element={<InvoiceRoutes />} />
+        <Route path="*" element={<Navigate to={"/"} />} />
         </Route>
-        <Route
-          path="*"
-          element={
-            token && uid ? (
-              <Navigate to={"/"} />
-            ) : (
-              <Navigate to={"auth/login"} />
-            )
-          }
-        />
       </Routes>
     </BrowserRouter>
   );
