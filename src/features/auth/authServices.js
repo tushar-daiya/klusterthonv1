@@ -31,7 +31,7 @@ export const authApi = createApi({
     }),
     getUserDetails: builder.query({
       query: () => ({
-        url: `user?_id=${Cookies.get("uid")}`,
+        url: `user?_id=${Cookies.get("uid") === undefined ? 0 : Cookies.get("uid")}`,
         method: "GET",
       }),
       providesTags: ["User"],
