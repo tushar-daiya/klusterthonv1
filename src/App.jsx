@@ -26,7 +26,6 @@ import ClientInvoices from "./Pages/ClientInvoices";
 import ViewInvoiceWithoutLogin from "./Pages/ViewInvoiceWithoutLogin";
 
 function App() {
-  
   const { token, uid } = useSelector((state) => state.auth);
   return (
     <BrowserRouter>
@@ -37,7 +36,13 @@ function App() {
         />
         <Route
           path="invoice/view/:id"
-          element={!token && !uid ? <ViewInvoiceWithoutLogin />:<Navigate to={"/"} />}
+          element={
+            !token && !uid ? <ViewInvoiceWithoutLogin /> : <Navigate to={"/"} />
+          }
+        />
+        <Route
+          path="/payment"
+          element={!token && !uid ? <StripeContainer /> : <Navigate to={"/"} />}
         />
         <Route
           element={token && uid ? <Layout /> : <Navigate to={"auth/login"} />}
@@ -45,7 +50,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="clients/*" element={<ClientRoutes />} />
           <Route path="invoices/*" element={<InvoiceRoutes />} />
-        <Route path="*" element={<Navigate to={"/"} />} />
+          <Route path="*" element={<Navigate to={"/"} />} />
         </Route>
       </Routes>
     </BrowserRouter>
