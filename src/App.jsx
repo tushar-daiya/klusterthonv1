@@ -26,64 +26,7 @@ import ClientInvoices from "./Pages/ClientInvoices";
 import ViewInvoiceWithoutLogin from "./Pages/ViewInvoiceWithoutLogin";
 
 function App() {
-  // const dispatch = useDispatch();
-  // const { data, isLoading } = useGetUserDetailsQuery("userDetails");
-  // useEffect(() => {
-  //   if (data) {
-  //     dispatch(setUser(data.data));
-  //   }
-  // }, [data]);
-  // const { user } = useSelector((state) => state.auth);
-
-  // if (isLoading) {
-  //   return (
-  //     <div className="min-h-screen flex flex-col items-center justify-center">
-  //       <div className="animate-spin rounded-full border-t-4 border-red-500 p-4">
-  //         <RefreshCcw className="w-12 h-12 text-red-500" />
-  //       </div>
-  //       <p className="mt-4 text-lg text-gray-800">Loading... Please wait.</p>
-  //     </div>
-  //   );
-  // }
-
-  // return (
-  //   <BrowserRouter>
-  //     <Routes>
-  //       {!user && (
-  //         <Route
-  //           path="invoices/view/:id"
-  //           element={!user && <ViewInvoiceWithoutLogin />}
-  //         />
-  //       )}
-  //       {!user && <Route path="/payment" element={<StripeContainer />} />}
-
-  //       <Route
-  //         element={
-  //           !user ? (
-  //             <Navigate to={"/auth/login/"} />
-  //           ) : (
-  //             <Layout />
-  //           )
-  //         }
-  //       >
-  //         <Route path="/" element={<Dashboard />} />
-  //         <Route path="clients/*" element={<ClientRoutes />} />
-  //         <Route path="invoices/*" element={<InvoiceRoutes />} />
-  //       </Route>
-  //       <Route
-  //         path="auth/*"
-  //         element={
-  //           user ? (
-  //             <Navigate to={"/"} />
-  //           ) : (
-  //             <AuthRoutes />
-  //           )
-  //         }
-  //       />
-  //       <Route path="*" element={<Navigate to={"/"} />} />
-  //     </Routes>
-  //   </BrowserRouter>
-  // );
+  
   const { token, uid } = useSelector((state) => state.auth);
   return (
     <BrowserRouter>

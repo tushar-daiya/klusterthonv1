@@ -7,7 +7,6 @@ import { RefreshCcw } from "lucide-react";
 import { setUser } from "../features/auth/authSlice";
 
 function Layout() {
-  console.log("layout")
   const dispatch = useDispatch();
   const {user} = useSelector((state) => state.auth);
   const { data, isLoading } = useGetUserDetailsQuery("userDetails");
