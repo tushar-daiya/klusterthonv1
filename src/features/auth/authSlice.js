@@ -5,6 +5,8 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 const initialState = {
   loading: false,
+  token: Cookies.get("token")||null,
+  uid: Cookies.get("uid")||null,
   user: null,
   error: null,
   success: false,
@@ -16,6 +18,8 @@ const authSlice = createSlice({
     logoutUser: (state) => {
       Cookies.remove("token");
       Cookies.remove("uid");
+      state.token = null;
+      state.uid = null;
       state.user = null;
       state.error = null;
       state.success = false;
@@ -52,7 +56,9 @@ const authSlice = createSlice({
       },
       [userLogin.fulfilled]: (state, { payload }) => {
         state.loading = false
-        state.user = payload
+        state.user = payload.user
+        state.token = payload.token
+        state.uid = payload._id
         toast.dismiss();
         toast.success("Logged in successfully!");
       },

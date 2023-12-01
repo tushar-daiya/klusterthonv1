@@ -38,9 +38,10 @@ export const userLogin = createAsyncThunk(
         { email, password },
         config
       );
-      Cookies.set("token", data.data.token, { expires: 1 });
-      Cookies.set("uid", data.data._id, { expires: 1 });
-      return data.data;
+      let {token,_id,...user}=data.data
+      Cookies.set("token", token, { expires: 1 });
+      Cookies.set("uid", _id, { expires: 1 });
+      return {token,_id,user}
     } catch (error) {
       // return custom error message from API if any
       if (error.response && error.response.data.message) {
