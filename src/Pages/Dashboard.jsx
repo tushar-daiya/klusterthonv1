@@ -98,7 +98,7 @@ function Dashboard() {
     datasets: [
       {
         data: chartDataSet,
-        backgroundColor: "#eeeeee",
+        backgroundColor: "rgba(239,0,0,0.3)",
         hoverBackgroundColor: "#ef0000",
       },
     ],
